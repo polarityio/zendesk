@@ -109,7 +109,7 @@ module.exports = {
       name: 'Zendesk API Token',
       description: 'Your Zendesk API Token (not your password)',
       default: '',
-      type: 'text',
+      type: 'password',
       userCanEdit: true,
       adminOnly: false
     },
