@@ -181,9 +181,14 @@ function _createQuery(entityObj, options) {
   let order = 'order_by:updated_at sort:desc';
   let assignee = options.assigneeOnly ? 'assignee:me' : '';
 
-  options.statuses.forEach((status) => {
-    statuses += `status:${status.value} `;
-  });
+  if(Array.isArray(options.statuses)) {
+      options.statuses.forEach((status) => {
+          statuses += `status:${status.value} `;
+      });
+  }else{
+    statuses = 'status:open ';
+  }
+
 
   return `type:ticket ${order} ${assignee} ${statuses} "${entityObj.value}"`;
 }
