@@ -68,6 +68,8 @@ function _setupRegexBlacklists(options) {
 function doLookup(entities, options, cb) {
   const lookupResults = [];
 
+  log.trace({ entities: entities, options: options }, 'Entities');
+
   _setupRegexBlacklists(options);
 
   async.each(
@@ -90,6 +92,7 @@ function doLookup(entities, options, cb) {
       });
     },
     function(err) {
+      log.debug({lookupResults:lookupResults}, 'Lookup Results');
       cb(err, lookupResults);
     }
   );
@@ -115,6 +118,7 @@ function _lookupEntity(entityObj, options, cb) {
   requestWithDefaults(requestOptions, function(err, response, body) {
     // check for a request error
     if (err) {
+      log.error({ err: err, body: body }, 'Error making HTTP Request');
       return cb({
         detail: 'Error Making HTTP Request',
         debug: err
