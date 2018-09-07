@@ -1,0 +1,11 @@
+{
+  "main": "./integration.js",
+  "name": "Zendesk",
+  "description": "Zendesk Search",
+  "version": "3.0.0-beta",
+  "private": true,
+  "dependencies": {
+    "request": ">=2.76.0",
+    "async": ">=2.1.2"
+  }
+}

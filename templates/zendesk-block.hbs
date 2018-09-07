@@ -1,0 +1,74 @@
+{{#each details as |result index|}}
+    {{#if result.via}}
+        <h1 class="p-title">
+            {{fa-icon "ticket" fixedWidth=true}}
+            <a class="p-link" href="{{block.userOptions.baseUrl}}/agent/tickets/{{result.id}}">
+                Zendesk Ticket {{result.id}}
+                {{fa-icon "external-link" fixedWidth=true}}
+            </a>
+        </h1>
+        {{#if result.via.source.from.name}}
+            <div>
+                <span class="p-key">From:</span>
+                <span class="p-value">{{result.via.source.from.name}}</span>
+            </div>
+        {{/if}}
+        {{#if result.via.source.from.address}}
+            <div>
+                <span class="p-key">From Email:</span>
+                <span class="p-value">{{result.via.source.from.address}}</span>
+            </div>
+        {{/if}}
+        {{#if result.type}}
+            <div>
+                <span class="p-key">Type:</span>
+                <span class="p-value">{{result.type}}</span>
+            </div>
+        {{/if}}
+        {{#if result.status}}
+            <div>
+                <span class="p-key">Status:</span>
+                <span class="p-value">{{result.status}}</span>
+            </div>
+        {{/if}}
+        {{#if result.priority}}
+            <div>
+                <span class="p-key">Priority:</span>
+                <span class="p-value">{{result.priority}}</span>
+            </div>
+        {{/if}}
+        {{#if result.subject}}
+            <div>
+                <span class="p-key">Subject:</span>
+                <span class="p-value">{{result.subject}}</span>
+            </div>
+        {{/if}}
+        {{#if result.created_at}}
+            <div>
+                <span class="p-key">Created:</span>
+                <span class="p-value">{{moment-format result.created_at 'MM/DD/YYYY h:mm:ss a'
+                                                      timeZone=timezone}}</span>
+            </div>
+        {{/if}}
+        {{#if result.updated_at}}
+            <div>
+                <span class="p-key">Updated:</span>
+                <span class="p-value">{{moment-format result.updated_at 'MM/DD/YYYY h:mm:ss a'
+                                                      timeZone=timezone}}</span>
+            </div>
+        {{/if}}
+        {{#if result.description}}
+            <div class="email-container">
+                <span class="p-action" {{action "toggleVisibility" index}}>
+                    {{#if (get showEmail index)}}Hide{{else}}View{{/if}} Email
+                    {{fa-icon (if (get showEmail index) "caret-up" "caret-down")}}
+                </span>
+                {{#if (get showEmail index)}}
+                    <div>
+                        <pre>{{{result.description}}}</pre>
+                    </div>
+                {{/if}}
+            </div>
+        {{/if}}
+    {{/if}}
+{{/each}}
