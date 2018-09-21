@@ -117,10 +117,10 @@ module.exports = {
       key: 'statuses',
       name: 'Ticket Status',
       description: 'Select the ticket statuses you would like to return results for',
-      default: {
+      default: [{
         value: 'open',
         display: 'Open'
-      },
+      }],
       type: 'select',
       options: [
         {
