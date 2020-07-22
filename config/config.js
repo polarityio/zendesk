@@ -157,7 +157,7 @@ module.exports = {
         'Domains (including in email addresses) that match the given regex will not be searched.',
       default: '',
       type: 'text',
-      userCanEdit: true,
+      userCanEdit: false,
       adminOnly: false
     }
   ]
