@@ -151,13 +151,13 @@ module.exports = {
       adminOnly: false
     },
     {
-      key: 'domainBlacklistRegex',
-      name: 'Domain Black List Regex',
+      key: 'domainBlocklistRegex',
+      name: 'Ignored Domain Regex',
       description:
-        'Domains (including in email addresses) that match the given regex will not be searched (if blank, no domains will be black listed)',
+        'Domains (including in email addresses) that match the given regex will not be searched.',
       default: '',
       type: 'text',
-      userCanEdit: true,
+      userCanEdit: false,
       adminOnly: false
     }
   ]

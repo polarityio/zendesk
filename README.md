@@ -33,9 +33,9 @@ Select the ticket statuses you want to return results for.  For example, if set 
 
 If checked, the integration will only search tickets that have been assigned to your account (based on your username)
 
-### Domain Black List Regex
+### Ignored Domain Regex
 
-Domains (including in email addresses) that match the given regex will not be searched (if blank, no domains will be black listed)
+Domains (including in email addresses) that match the given regex will not be searched.
 
 ## Installation Instructions
 
