@@ -1,6 +1,6 @@
 'use strict';
 
-const request = require('request');
+const request = require('postman-request');
 const async = require('async');
 const config = require('./config/config');
 const fs = require('fs');
@@ -13,7 +13,7 @@ let domainBlocklistRegex = null;
 // Maximum number of results to return in a singel request
 const PAGE_LIMIT = 10;
 
-function startup(logger) {
+function startup (logger) {
   log = logger;
 
   let requestOptions = {};
@@ -45,7 +45,7 @@ function startup(logger) {
   requestWithDefaults = request.defaults(requestOptions);
 }
 
-function _setupRegexBlocklists(options) {
+function _setupRegexBlocklists (options) {
   if (
     options.domainBlocklistRegex !== previousDomainRegexAsString &&
     options.domainBlocklistRegex.length === 0
@@ -65,7 +65,7 @@ function _setupRegexBlocklists(options) {
   }
 }
 
-function doLookup(entities, options, cb) {
+function doLookup (entities, options, cb) {
   const lookupResults = [];
 
   log.trace({ entities: entities, options: options }, 'Entities');
@@ -74,7 +74,7 @@ function doLookup(entities, options, cb) {
 
   async.each(
     entities,
-    function(entityObj, next) {
+    function (entityObj, next) {
       if (domainBlocklistRegex !== null) {
         if (domainBlocklistRegex.test(entityObj.value)) {
           log.debug({ domain: entityObj.value }, 'Blocked BlockListed Domain Lookup');
@@ -82,7 +82,7 @@ function doLookup(entities, options, cb) {
         }
       }
 
-      _lookupEntity(entityObj, options, function(err, result) {
+      _lookupEntity(entityObj, options, function (err, result) {
         if (err) {
           next(err);
         } else {
@@ -91,14 +91,14 @@ function doLookup(entities, options, cb) {
         }
       });
     },
-    function(err) {
-      log.debug({lookupResults:lookupResults}, 'Lookup Results');
+    function (err) {
+      log.debug({ lookupResults: lookupResults }, 'Lookup Results');
       cb(err, lookupResults);
     }
   );
 }
 
-function _lookupEntity(entityObj, options, cb) {
+function _lookupEntity (entityObj, options, cb) {
   const requestOptions = {
     uri: options.baseUrl + '/api/v2/search.json',
     method: 'GET',
@@ -115,7 +115,7 @@ function _lookupEntity(entityObj, options, cb) {
 
   log.trace({ requestOptions: requestOptions }, 'Request Options');
 
-  requestWithDefaults(requestOptions, function(err, response, body) {
+  requestWithDefaults(requestOptions, function (err, response, body) {
     // check for a request error
     if (err) {
       log.error({ err: err, body: body }, 'Error making HTTP Request');
@@ -170,25 +170,24 @@ function _lookupEntity(entityObj, options, cb) {
   });
 }
 
-function _getTags(body) {
+function _getTags (body) {
   const tags = [];
   tags.push(`${body.count} tickets`);
   return tags;
 }
 
-function _createQuery(entityObj, options) {
+function _createQuery (entityObj, options) {
   let statuses = '';
   let order = 'order_by:updated_at sort:desc';
   let assignee = options.assigneeOnly ? 'assignee:me' : '';
 
-  if(Array.isArray(options.statuses)) {
-      options.statuses.forEach((status) => {
-          statuses += `status:${status.value} `;
-      });
-  }else{
+  if (Array.isArray(options.statuses)) {
+    options.statuses.forEach((status) => {
+      statuses += `status:${status.value} `;
+    });
+  } else {
     statuses = 'status:open ';
   }
-
 
   return `type:ticket ${order} ${assignee} ${statuses} "${entityObj.value}"`;
 }
