@@ -1,17 +1,13 @@
 {
   "name": "Zendesk",
   "acronym": "ZEND",
-  "entityTypes": [
-    "email",
-    "domain"
-  ],
+  "defaultColor": "light-blue",
+  "entityTypes": ["email", "domain"],
   "logging": {
     "level": "info"
   },
   "description": "Lookup Zendesk tickets by keywords or phrases",
-  "styles": [
-    "./styles/zendesk.less"
-  ],
+  "styles": ["./styles/zendesk.less"],
   "block": {
     "component": {
       "file": "./components/zendesk-block.js"
