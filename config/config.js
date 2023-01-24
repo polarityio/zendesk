@@ -15,7 +15,7 @@ module.exports = {
    * @required
    */
   acronym: 'ZEND',
-
+  defaultColor: 'light-blue',
   entityTypes: ['email', 'domain'],
 
   logging: {
@@ -117,10 +117,12 @@ module.exports = {
       key: 'statuses',
       name: 'Ticket Status',
       description: 'Select the ticket statuses you would like to return results for',
-      default: [{
-        value: 'open',
-        display: 'Open'
-      }],
+      default: [
+        {
+          value: 'open',
+          display: 'Open'
+        }
+      ],
       type: 'select',
       options: [
         {

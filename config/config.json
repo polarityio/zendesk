@@ -1,0 +1,103 @@
+{
+  "name": "Zendesk",
+  "acronym": "ZEND",
+  "defaultColor": "light-blue",
+  "entityTypes": ["email", "domain"],
+  "logging": {
+    "level": "info"
+  },
+  "description": "Lookup Zendesk tickets by keywords or phrases",
+  "styles": ["./styles/zendesk.less"],
+  "block": {
+    "component": {
+      "file": "./components/zendesk-block.js"
+    },
+    "template": {
+      "file": "./templates/zendesk-block.hbs"
+    }
+  },
+  "request": {
+    "cert": "",
+    "key": "",
+    "passphrase": "",
+    "ca": "",
+    "proxy": "",
+    "rejectUnauthorized": true
+  },
+  "options": [
+    {
+      "key": "baseUrl",
+      "name": "Zendesk Base Url",
+      "description": "Your Zendesk Base Url including the schema (e.g., https://<mycompany>.zendesk.com)",
+      "default": "",
+      "type": "text",
+      "userCanEdit": true,
+      "adminOnly": false
+    },
+    {
+      "key": "username",
+      "name": "Zendesk Username",
+      "description": "Your Zendesk Username",
+      "default": "",
+      "type": "text",
+      "userCanEdit": true,
+      "adminOnly": false
+    },
+    {
+      "key": "apiToken",
+      "name": "Zendesk API Token",
+      "description": "Your Zendesk API Token (not your password)",
+      "default": "",
+      "type": "password",
+      "userCanEdit": true,
+      "adminOnly": false
+    },
+    {
+      "key": "statuses",
+      "name": "Ticket Status",
+      "description": "Select the ticket statuses you would like to return results for",
+      "default": [
+        {
+          "value": "open",
+          "display": "Open"
+        }
+      ],
+      "type": "select",
+      "options": [
+        {
+          "value": "open",
+          "display": "Open"
+        },
+        {
+          "value": "pending",
+          "display": "Pending"
+        },
+        {
+          "value": "solved",
+          "display": "Solved"
+        }
+      ],
+      "multiple": true,
+      "userCanEdit": true,
+      "adminOnly": false
+    },
+    {
+      "key": "assigneeOnly",
+      "name": "Only Search My Tickets",
+      "description": "If checked, the integration will only search tickets that have been assigned to your account (based on your username)",
+      "default": true,
+      "type": "boolean",
+      "userCanEdit": true,
+      "adminOnly": false
+    },
+    {
+      "key": "domainBlocklistRegex",
+      "name": "Ignored Domain Regex",
+      "description": "Domains (including in email addresses) that match the given regex will not be searched.",
+      "default": "",
+      "type": "text",
+      "userCanEdit": false,
+      "adminOnly": false
+    }
+  ]
+}
