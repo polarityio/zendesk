@@ -1,6 +1,6 @@
 {
   "name": "Zendesk",
-  "version": "3.0.5-beta",
+  "version": "3.0.6-beta",
   "main": "./integration.js",
   "description": "Zendesk Search",
   "private": true,
